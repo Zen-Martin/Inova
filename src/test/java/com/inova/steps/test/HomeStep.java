@@ -44,8 +44,22 @@ public class HomeStep implements En {
             Assert.assertEquals(homePage.verifyDuplicateSocialNetwork(),true);
         });
 
+        When("Enter your email address in the newsletter subscription field", () -> {
+            homePage.setNewsletterEmail();
+        });
 
+        When("Click on the Subscribe button", () -> {
+            homePage.saveScreenShotPNG();
+        });
 
+        Then("A registration confirmation message should appear", () -> {
+            homePage.verifyNewsletterSubscription();
+        });
+
+        But("We are redirected to a page without content with an error message at the foot of the page", () -> {
+            homePage.saveScreenShotPNG();
+            Assert.assertEquals(homePage.verifyNewsletterSubscription(),true);
+        });
 
     }
 

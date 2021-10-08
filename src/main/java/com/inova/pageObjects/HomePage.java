@@ -2,6 +2,8 @@ package com.inova.pageObjects;
 
 import com.inova.config.Configuration;
 import com.inova.config.Properties;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -31,15 +33,25 @@ public class HomePage extends Page {
     @FindBy(xpath = "//body/footer[@id='footer']/div[2]/div[1]/div[1]/div[4]/div[1]/a[3]")
     private WebElement instagramLogo;
 
+    @FindBy(xpath = "//body/footer[@id='footer']/div[1]/div[1]/div[1]/div[1]/form[1]/input[3]")
+    private WebElement newsletterEmailField;
+
+    @FindBy(css = "body")
+    private WebElement sectionContent;
+
     private final static Configuration PROP  = Properties.Config;
 
     public HomePage() {
     }
 
-    public void navigateToHomePage(){
-        get(PROP.getEnvironment());
+    public void handleAccess(){
         waitForLoadingPage();
         shortUntil(visibilityOf(logo));
+    }
+
+    public void navigateToHomePage(){
+        get(PROP.getEnvironment());
+        handleAccess();
     }
 
     public void scrollToFooter(){
@@ -55,21 +67,6 @@ public class HomePage extends Page {
         return developmentOption.getText();
     }
 
-    public boolean verifySecurePage(){
-        System.out.println("\n Page URL : "+getURLHeader());
-        if (getURLHeader().contains("https")){
-            System.out.println("\n Secured URL : "
-                    + "\n\n\tBug Corrigé !!!");
-            return true;
-
-        } else {
-            System.out.println("\n Unsecured URL : "
-                    + "\n\n\tBug Non Corrigé !!!");
-            return false;
-        }
-
-    }
-
     public boolean isFacebookMultipleOccurrence(){
 
         if(facebookLogo.getAttribute("href").equals(facebookOption.getAttribute("href"))){
@@ -81,12 +78,42 @@ public class HomePage extends Page {
 
     }
 
-    public boolean isInstagramMultipleOccurrence(){
+    public void setNewsletterEmail(){
+        shortUntil(visibilityOf(newsletterEmailField));
+        newsletterEmailField.sendKeys(PROP.getEmail());
+        newsletterEmailField.sendKeys(Keys.ENTER);
+        handleAccess();
+    }
 
+    public boolean isEffectiveNewsletterRedirection(){
+        if(sectionContent.getText().contains("Erreur !: SQLSTATE[HY000]")){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public boolean isInstagramMultipleOccurrence(){
         if(instagramLogo.getAttribute("href").equals(instagramOption.getAttribute("href"))){
             return true;
         }
         else{
+            return false;
+        }
+
+    }
+
+    public boolean verifySecurePage(){
+        System.out.println("\n Page URL : "+getURLHeader());
+        if (getURLHeader().contains("https")){
+            System.out.println("\n Secured URL : "
+                    + "\n\n\tBug Corrigé !!!");
+            return true;
+
+        } else {
+            System.out.println("\n Unsecured URL : "
+                    + "\n\n\tBug Non Corrigé !!!");
             return false;
         }
 
@@ -117,6 +144,21 @@ public class HomePage extends Page {
 
         } else {
             System.out.println("\n Social Networks redirection duplicated : "
+                    + "\n\n\tBug Non Corrigé !!!");
+            return false;
+        }
+
+    }
+
+    public boolean verifyNewsletterSubscription(){
+        System.out.println("\nNewsletter subscription statut : "+isEffectiveNewsletterRedirection());
+        if (isEffectiveNewsletterRedirection()==true){
+            System.out.println("\n Effective Newsletter subscription : "
+                    + "\n\n\tBug Corrigé !!!");
+            return true;
+
+        } else {
+            System.out.println("\n Newsletter subscription not effective : "
                     + "\n\n\tBug Non Corrigé !!!");
             return false;
         }
