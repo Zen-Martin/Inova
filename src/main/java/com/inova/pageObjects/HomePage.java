@@ -19,6 +19,18 @@ public class HomePage extends Page {
     @FindBy(xpath = "//a[contains(text(),\"Développelent d'applications\")]")
     private WebElement developmentOption;
 
+    @FindBy(linkText = "Page Facebook")
+    private WebElement facebookOption;
+
+    @FindBy(xpath = "//body/footer[@id='footer']/div[2]/div[1]/div[1]/div[4]/div[1]/a[2]")
+    private WebElement facebookLogo;
+
+    @FindBy(linkText = "Page Instagram")
+    private WebElement instagramOption;
+
+    @FindBy(xpath = "//body/footer[@id='footer']/div[2]/div[1]/div[1]/div[4]/div[1]/a[3]")
+    private WebElement instagramLogo;
+
     private final static Configuration PROP  = Properties.Config;
 
     public HomePage() {
@@ -58,6 +70,28 @@ public class HomePage extends Page {
 
     }
 
+    public boolean isFacebookMultipleOccurrence(){
+
+        if(facebookLogo.getAttribute("href").equals(facebookOption.getAttribute("href"))){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public boolean isInstagramMultipleOccurrence(){
+
+        if(instagramLogo.getAttribute("href").equals(instagramOption.getAttribute("href"))){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
     public boolean verifyDevelopmentSpelling(){
         System.out.println("\n Option Spelling : "+developmentOptionText());
         if (!developmentOptionText().contains("Développelent")){
@@ -67,6 +101,22 @@ public class HomePage extends Page {
 
         } else {
             System.out.println("\n Bad Spelling : "
+                    + "\n\n\tBug Non Corrigé !!!");
+            return false;
+        }
+
+    }
+
+    public boolean verifyDuplicateSocialNetwork(){
+        System.out.println("\nDuplicate Facebook redirection : "+isFacebookMultipleOccurrence()
+        +"\nDuplicate Instagram redirection : "+isInstagramMultipleOccurrence());
+        if (isFacebookMultipleOccurrence()==false && isInstagramMultipleOccurrence()==false){
+            System.out.println("\n Social Networks redirection non duplicated : "
+                    + "\n\n\tBug Corrigé !!!");
+            return true;
+
+        } else {
+            System.out.println("\n Social Networks redirection duplicated : "
                     + "\n\n\tBug Non Corrigé !!!");
             return false;
         }

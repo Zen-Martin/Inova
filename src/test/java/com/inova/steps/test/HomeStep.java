@@ -35,6 +35,16 @@ public class HomeStep implements En {
             Assert.assertEquals(homePage.verifyDevelopmentSpelling(),true);
         });
 
+        Then("options for redirecting to social networks should appear only one time", () -> {
+            homePage.verifyDuplicateSocialNetwork();
+        });
+
+        But("Facebook and Instagram social media access options appear in duplicate", () -> {
+            homePage.saveScreenShotPNG();
+            Assert.assertEquals(homePage.verifyDuplicateSocialNetwork(),true);
+        });
+
+
 
 
     }
