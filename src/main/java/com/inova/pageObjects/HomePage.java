@@ -2,7 +2,6 @@ package com.inova.pageObjects;
 
 import com.inova.config.Configuration;
 import com.inova.config.Properties;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class HomePage extends Page {
-
 
     @FindBy(id = "footer")
     private WebElement footer;
@@ -39,7 +37,12 @@ public class HomePage extends Page {
     @FindBy(css = "body")
     private WebElement sectionContent;
 
+    @FindBy(linkText = "Consulting")
+    private WebElement consultingTab;
+
     private final static Configuration PROP  = Properties.Config;
+
+    private final static String URI  = PROP.getEnvironment()+"contact.php";
 
     public HomePage() {
     }
@@ -50,7 +53,7 @@ public class HomePage extends Page {
     }
 
     public void navigateToHomePage(){
-        get(PROP.getEnvironment());
+        get(URI);
         handleAccess();
     }
 
@@ -59,23 +62,17 @@ public class HomePage extends Page {
         scroll((footer.getLocation().getY()-20));
     }
 
-    public String getURLHeader(){
+    /*public String getURLHeader(){
         return driver.getCurrentUrl();
-    }
+    }*/
 
     public String developmentOptionText(){
         return developmentOption.getText();
     }
 
     public boolean isFacebookMultipleOccurrence(){
-
-        if(facebookLogo.getAttribute("href").equals(facebookOption.getAttribute("href"))){
-            return true;
-        }
-        else{
-            return false;
-        }
-
+        return facebookLogo.getAttribute("href")
+                           .equals(facebookOption.getAttribute("href"));
     }
 
     public void setNewsletterEmail(){
@@ -85,38 +82,32 @@ public class HomePage extends Page {
         handleAccess();
     }
 
+    public void goToConsultingSection(){
+        clickOn(consultingTab);
+        waitForLoadingPage();
+        handleAccess();
+    }
+
     public boolean isEffectiveNewsletterRedirection(){
-        if(sectionContent.getText().contains("Erreur !: SQLSTATE[HY000]")){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return sectionContent.getText()
+                             .contains("Erreur !: SQLSTATE[HY000]");
     }
 
     public boolean isInstagramMultipleOccurrence(){
-        if(instagramLogo.getAttribute("href").equals(instagramOption.getAttribute("href"))){
-            return true;
-        }
-        else{
-            return false;
-        }
-
+        return instagramLogo.getAttribute("href")
+                            .equals(instagramOption.getAttribute("href"));
     }
 
     public boolean verifySecurePage(){
-        System.out.println("\n Page URL : "+getURLHeader());
-        if (getURLHeader().contains("https")){
+        System.out.println("\n Page URL : "+driver.getCurrentUrl());
+        if (driver.getCurrentUrl().contains("https")){
             System.out.println("\n Secured URL : "
                     + "\n\n\tBug Corrigé !!!");
-            return true;
-
         } else {
             System.out.println("\n Unsecured URL : "
                     + "\n\n\tBug Non Corrigé !!!");
-            return false;
         }
-
+        return (driver.getCurrentUrl().contains("https"));
     }
 
     public boolean verifyDevelopmentSpelling(){
@@ -124,14 +115,11 @@ public class HomePage extends Page {
         if (!developmentOptionText().contains("Développelent")){
             System.out.println("\n Good Spelling : "
                     + "\n\n\tBug Corrigé !!!");
-            return true;
-
         } else {
             System.out.println("\n Bad Spelling : "
                     + "\n\n\tBug Non Corrigé !!!");
-            return false;
         }
-
+        return (!developmentOptionText().contains("Développelent"));
     }
 
     public boolean verifyDuplicateSocialNetwork(){
@@ -140,14 +128,11 @@ public class HomePage extends Page {
         if (isFacebookMultipleOccurrence()==false && isInstagramMultipleOccurrence()==false){
             System.out.println("\n Social Networks redirection non duplicated : "
                     + "\n\n\tBug Corrigé !!!");
-            return true;
-
         } else {
             System.out.println("\n Social Networks redirection duplicated : "
                     + "\n\n\tBug Non Corrigé !!!");
-            return false;
         }
-
+        return (isFacebookMultipleOccurrence()==false && isInstagramMultipleOccurrence()==false);
     }
 
     public boolean verifyNewsletterSubscription(){
@@ -155,14 +140,11 @@ public class HomePage extends Page {
         if (isEffectiveNewsletterRedirection()==true){
             System.out.println("\n Effective Newsletter subscription : "
                     + "\n\n\tBug Corrigé !!!");
-            return true;
-
         } else {
             System.out.println("\n Newsletter subscription not effective : "
                     + "\n\n\tBug Non Corrigé !!!");
-            return false;
         }
-
+        return (isEffectiveNewsletterRedirection()==true);
     }
 
 }

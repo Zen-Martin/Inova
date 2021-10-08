@@ -9,8 +9,8 @@ Scenario: Check that the page does not display the 404 Not found error
   When Click on the Contact Us tab
   And Fill in the form
   And Click on Send message
-  Then The redirection of each link should be done to each service block that has the description located on the same page.
-  But The redirection is made to the banner of the same page
+  Then The redirection of this link should be done to the service block that has the description located on the same page.
+  But The redirection is made on banner of the same page
 
 
 @Bug_1647
@@ -40,7 +40,7 @@ Scenario: Check that the command button is functional
 @Severity=major
 Scenario: Check that the link redirection is effective
   When Click on the Consulting tab
-  And Scroll down
+  And Scroll to the footer
   And Click Software integration
   Then The redirection of each link should be done to each service block that has the description located on the same page.
   But The redirection is made to the banner of the same page

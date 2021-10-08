@@ -29,6 +29,10 @@ public class HomeStep implements En {
             homePage.scrollToFooter();
         });
 
+        When("Click on the Consulting tab", () -> {
+            homePage.goToConsultingSection();
+        });
+
         Then("Spelling error at the Development level", () -> {
             homePage.verifyDevelopmentSpelling();
             homePage.saveScreenShotPNG();
