@@ -21,7 +21,7 @@ Scenario: Check if it is possible to subscribe to the newsletter
   Then A registration confirmation message should appear
   But We are redirected to a page without content with an error message at the foot of the page
 
-@Vulnerabiliy_1648
+@Vulnerability_1648
 @Severity=major
 Scenario: [Vulnérability] Non-security access to the site
   When Check URL

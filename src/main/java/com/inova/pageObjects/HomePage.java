@@ -62,10 +62,6 @@ public class HomePage extends Page {
         scroll((footer.getLocation().getY()-20));
     }
 
-    /*public String getURLHeader(){
-        return driver.getCurrentUrl();
-    }*/
-
     public String developmentOptionText(){
         return developmentOption.getText();
     }
@@ -99,52 +95,19 @@ public class HomePage extends Page {
     }
 
     public boolean verifySecurePage(){
-        System.out.println("\n Page URL : "+driver.getCurrentUrl());
-        if (driver.getCurrentUrl().contains("https")){
-            System.out.println("\n Secured URL : "
-                    + "\n\n\tBug Corrigé !!!");
-        } else {
-            System.out.println("\n Unsecured URL : "
-                    + "\n\n\tBug Non Corrigé !!!");
-        }
         return (driver.getCurrentUrl().contains("https"));
     }
 
     public boolean verifyDevelopmentSpelling(){
-        System.out.println("\n Option Spelling : "+developmentOptionText());
-        if (!developmentOptionText().contains("Développelent")){
-            System.out.println("\n Good Spelling : "
-                    + "\n\n\tBug Corrigé !!!");
-        } else {
-            System.out.println("\n Bad Spelling : "
-                    + "\n\n\tBug Non Corrigé !!!");
-        }
         return (!developmentOptionText().contains("Développelent"));
     }
 
     public boolean verifyDuplicateSocialNetwork(){
-        System.out.println("\nDuplicate Facebook redirection : "+isFacebookMultipleOccurrence()
-        +"\nDuplicate Instagram redirection : "+isInstagramMultipleOccurrence());
-        if (isFacebookMultipleOccurrence()==false && isInstagramMultipleOccurrence()==false){
-            System.out.println("\n Social Networks redirection non duplicated : "
-                    + "\n\n\tBug Corrigé !!!");
-        } else {
-            System.out.println("\n Social Networks redirection duplicated : "
-                    + "\n\n\tBug Non Corrigé !!!");
-        }
-        return (isFacebookMultipleOccurrence()==false && isInstagramMultipleOccurrence()==false);
+        return (!isFacebookMultipleOccurrence() && !isInstagramMultipleOccurrence());
     }
 
     public boolean verifyNewsletterSubscription(){
-        System.out.println("\nNewsletter subscription statut : "+isEffectiveNewsletterRedirection());
-        if (isEffectiveNewsletterRedirection()==true){
-            System.out.println("\n Effective Newsletter subscription : "
-                    + "\n\n\tBug Corrigé !!!");
-        } else {
-            System.out.println("\n Newsletter subscription not effective : "
-                    + "\n\n\tBug Non Corrigé !!!");
-        }
-        return (isEffectiveNewsletterRedirection()==true);
+        return (!isEffectiveNewsletterRedirection());
     }
 
 }
