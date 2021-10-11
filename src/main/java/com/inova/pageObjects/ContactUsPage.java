@@ -37,14 +37,14 @@ public class ContactUsPage extends Page{
         messageField.sendKeys("I want more informations about you");
     }
 
-    public void clickOnSend() throws InterruptedException {
+    public void clickOnSend(){
         subjectField.sendKeys(Keys.ENTER);
         shortUntil(visibilityOf(errorField));
         scroll(300);
     }
 
     public boolean verifyContactUsFunctionality(){
-        return (!errorField.isDisplayed());
+        return !errorField.isDisplayed();
     }
 
 }

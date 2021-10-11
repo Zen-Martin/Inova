@@ -12,7 +12,6 @@ Scenario: Check that the page does not display the 404 Not found error
   Then The redirection of this link should be done to the service block that has the description located on the same page.
   But The redirection is made on banner of the same page
 
-
 @Bug_1647
 @Severity=major
 Scenario: Check if it is possible to subscribe to the newsletter
@@ -38,7 +37,7 @@ Scenario: Check that the command button is functional
 
 @Bug_1655
 @Severity=major
-Scenario: Check that the link redirection is effective
+Scenario: Check that Software integration link redirection is effective
   When Click on the Consulting tab
   And Scroll to the footer
   And Click Software integration

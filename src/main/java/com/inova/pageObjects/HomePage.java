@@ -106,11 +106,11 @@ public class HomePage extends Page {
     }
 
     public boolean verifySecurePage(){
-        return (driver.getCurrentUrl().contains("https"));
+        return driver.getCurrentUrl().contains("https");
     }
 
     public boolean verifyDevelopmentSpelling(){
-        return (!developmentOptionText().contains("Développelent"));
+        return !developmentOptionText().contains("Développelent");
     }
 
     public boolean verifyDuplicateSocialNetwork(){
@@ -118,7 +118,7 @@ public class HomePage extends Page {
     }
 
     public boolean verifyNewsletterSubscription(){
-        return (!isEffectiveNewsletterRedirection());
+        return !isEffectiveNewsletterRedirection();
     }
 
 }
