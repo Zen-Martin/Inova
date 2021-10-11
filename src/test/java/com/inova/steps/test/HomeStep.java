@@ -30,7 +30,11 @@ public class HomeStep implements En {
         });
 
         When("Click on the Consulting tab", () -> {
-            homePage.goToConsultingSection();
+            homePage.clickOnConsultingTab();
+        });
+
+        When("Click on the Contact Us tab", () -> {
+            homePage.clickOnContactUsTab();
         });
 
         Then("Spelling error at the Development level", () -> {
@@ -53,7 +57,7 @@ public class HomeStep implements En {
         });
 
         When("Click on the Subscribe button", () -> {
-            homePage.saveScreenShotPNG();
+            homePage.clickOnSubscribre();
         });
 
         Then("A registration confirmation message should appear", () -> {

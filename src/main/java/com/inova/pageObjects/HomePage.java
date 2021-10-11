@@ -40,6 +40,9 @@ public class HomePage extends Page {
     @FindBy(linkText = "Consulting")
     private WebElement consultingTab;
 
+    @FindBy(linkText = "Nous contacter")
+    private WebElement contactUs;
+
     private final static Configuration PROP  = Properties.Config;
 
     private final static String URI  = PROP.getEnvironment()+"contact.php";
@@ -59,7 +62,7 @@ public class HomePage extends Page {
 
     public void scrollToFooter(){
         shortUntil(visibilityOf(footer));
-        scroll((footer.getLocation().getY()-20));
+        scroll((footer.getLocation().getY()+300));
     }
 
     public String developmentOptionText(){
@@ -74,13 +77,21 @@ public class HomePage extends Page {
     public void setNewsletterEmail(){
         shortUntil(visibilityOf(newsletterEmailField));
         newsletterEmailField.sendKeys(PROP.getEmail());
+    }
+
+    public void clickOnSubscribre(){
         newsletterEmailField.sendKeys(Keys.ENTER);
+        handleAccess();
+        scroll(750);
+    }
+
+    public void clickOnConsultingTab(){
+        clickOn(consultingTab);
         handleAccess();
     }
 
-    public void goToConsultingSection(){
-        clickOn(consultingTab);
-        waitForLoadingPage();
+    public void clickOnContactUsTab(){
+        clickOn(contactUs);
         handleAccess();
     }
 
