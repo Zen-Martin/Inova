@@ -18,11 +18,10 @@ public class ConsultingStep implements En {
         });
 
         Then("The redirection of each link should be done to each service block that has the description located on the same page.", () -> {
-            consultingPage.verifyLinkRedirection();
+            consultingPage.saveScreenShotPNG();
         });
 
         But("The redirection is made to the banner of the same page", () -> {
-            consultingPage.saveScreenShotPNG();
             Assert.assertEquals(consultingPage.verifyLinkRedirection(),true);
         });
 
@@ -35,11 +34,10 @@ public class ConsultingStep implements En {
         });
 
         Then("The action should initiate the order of the pack", () -> {
-            consultingPage.verifyOrderRedirection();
+            consultingPage.saveScreenShotPNG();
         });
 
         But("No reaction occurs", () -> {
-            consultingPage.saveScreenShotPNG();
             Assert.assertEquals(consultingPage.verifyOrderRedirection(),true);
         });
 

@@ -38,17 +38,15 @@ public class HomeStep implements En {
         });
 
         Then("Spelling error at the Development level", () -> {
-            homePage.verifyDevelopmentSpelling();
             homePage.saveScreenShotPNG();
             Assert.assertEquals(homePage.verifyDevelopmentSpelling(),true);
         });
 
         Then("options for redirecting to social networks should appear only one time", () -> {
-            homePage.verifyDuplicateSocialNetwork();
+            homePage.saveScreenShotPNG();
         });
 
         But("Facebook and Instagram social media access options appear in duplicate", () -> {
-            homePage.saveScreenShotPNG();
             Assert.assertEquals(homePage.verifyDuplicateSocialNetwork(),true);
         });
 
@@ -61,11 +59,10 @@ public class HomeStep implements En {
         });
 
         Then("A registration confirmation message should appear", () -> {
-            homePage.verifyNewsletterSubscription();
+            homePage.saveScreenShotPNG();
         });
 
         But("We are redirected to a page without content with an error message at the foot of the page", () -> {
-            homePage.saveScreenShotPNG();
             Assert.assertEquals(homePage.verifyNewsletterSubscription(),true);
         });
 

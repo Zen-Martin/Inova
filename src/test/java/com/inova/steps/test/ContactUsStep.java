@@ -21,11 +21,10 @@ public class ContactUsStep implements En {
         });
 
         Then("The redirection of this link should be done to the service block that has the description located on the same page.", () -> {
-            contactUsPage.verifyContactUsFunctionality();
+            contactUsPage.saveScreenShotPNG();
         });
 
         But("The redirection is made on banner of the same page", () -> {
-            contactUsPage.saveScreenShotPNG();
             Assert.assertEquals(contactUsPage.verifyContactUsFunctionality(),true);
         });
 
