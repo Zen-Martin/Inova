@@ -1,7 +1,5 @@
 package com.inova.pageObjects;
 
-import com.inova.config.Configuration;
-import com.inova.config.Properties;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,14 +23,12 @@ public class ContactUsPage extends Page{
     @FindBy(xpath = "//div[contains(text(),'Error: 404 Not Found http://inova-si.com/forms/con')]")
     private WebElement errorField;
 
-    private final static Configuration PROP  = Properties.Config;
-
     public ContactUsPage() {
     }
 
     public void fillForm(){
-        nameField.sendKeys(PROP.getEmail().substring(0,4));
-        emailField.sendKeys(PROP.getEmail());
+        nameField.sendKeys(config.getEmail().substring(0,4));
+        emailField.sendKeys(config.getEmail());
         subjectField.sendKeys("Need help");
         messageField.sendKeys("I want more informations about you");
     }

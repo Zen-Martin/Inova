@@ -1,7 +1,5 @@
 package com.inova.pageObjects;
 
-import com.inova.config.Configuration;
-import com.inova.config.Properties;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,9 +41,7 @@ public class HomePage extends Page {
     @FindBy(linkText = "Nous contacter")
     private WebElement contactUs;
 
-    private final static Configuration PROP  = Properties.Config;
-
-    private final static String URI  = PROP.getEnvironment()+"contact.php";
+    private final String URI  = config.getEnvironment()+"contact.php";
 
     public HomePage() {
     }
@@ -76,7 +72,7 @@ public class HomePage extends Page {
 
     public void setNewsletterEmail(){
         shortUntil(visibilityOf(newsletterEmailField));
-        newsletterEmailField.sendKeys(PROP.getEmail());
+        newsletterEmailField.sendKeys(config.getEmail());
     }
 
     public void clickOnSubscribre(){

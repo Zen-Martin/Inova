@@ -1,7 +1,5 @@
 package com.inova.pageObjects;
 
-import com.inova.config.Configuration;
-import com.inova.config.Properties;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,11 +12,9 @@ public class ConsultingPage extends Page{
     @FindBy(xpath = "//body/main[@id='main']/section[@id='tools']/div[1]/div[2]/div[2]/div[1]/a[1]")
     private WebElement orderButton;
 
-    private final static Configuration PROP  = Properties.Config;
+    private final String softwareIntegrationURI  = config.getEnvironment()+"consulting.php#";
 
-    private final static String softwareIntegrationURI  = PROP.getEnvironment()+"consulting.php#";
-
-    private final static String orderURI = PROP.getEnvironment()+"consulting.php#contact";
+    private final String orderURI = config.getEnvironment()+"consulting.php#contact";
 
     public ConsultingPage() {
 
