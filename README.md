@@ -16,15 +16,15 @@ These instructions will help you to take control of this Framework on your local
 
 ### Installing 💿
 
-Set Java, Allure and Maven as yours environment variables
-Add cucumber and gherkin plugins to your IDE
+* Set Java, Allure and Maven as yours environment variables
+* Add cucumber and gherkin plugins to your IDE
 
 ### How to use this 💡
 
-* Configure the Framework (if it's your first use)
-	Create a local directory local_driver inside Framework structure
+* Configure the Framework (if it's your first use)<br />
+	Create a local directory local_driver inside Framework structure<br />
  	Add webdrivers executables (chromedriver and geckodriver) in directory local_driver
-* Run test
+* Run test<br />
 	Use mvn test on your terminal to run and set up test execution
 
 ***********
