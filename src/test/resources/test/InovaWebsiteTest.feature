@@ -9,9 +9,8 @@ Scenario: Check that the page does not display the 404 Not found error
   When Click on the Contact Us tab
   And Fill in the form
   And Click on Send message
-  Then The redirection of each link should be done to each service block that has the description located on the same page.
-  But The redirection is made to the banner of the same page
-
+  Then The redirection of this link should be done to the service block that has the description located on the same page.
+  But The redirection is made on banner of the same page
 
 @Bug_1647
 @Severity=major
@@ -21,7 +20,7 @@ Scenario: Check if it is possible to subscribe to the newsletter
   Then A registration confirmation message should appear
   But We are redirected to a page without content with an error message at the foot of the page
 
-@Vulnerabiliy_1648
+@Vulnerability_1648
 @Severity=major
 Scenario: [Vulnérability] Non-security access to the site
   When Check URL
@@ -38,9 +37,9 @@ Scenario: Check that the command button is functional
 
 @Bug_1655
 @Severity=major
-Scenario: Check that the link redirection is effective
+Scenario: Check that Software integration link redirection is effective
   When Click on the Consulting tab
-  And Scroll down
+  And Scroll to the footer
   And Click Software integration
   Then The redirection of each link should be done to each service block that has the description located on the same page.
   But The redirection is made to the banner of the same page

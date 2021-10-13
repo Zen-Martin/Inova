@@ -29,13 +29,42 @@ public class HomeStep implements En {
             homePage.scrollToFooter();
         });
 
+        When("Click on the Consulting tab", () -> {
+            homePage.clickOnConsultingTab();
+        });
+
+        When("Click on the Contact Us tab", () -> {
+            homePage.clickOnContactUsTab();
+        });
+
         Then("Spelling error at the Development level", () -> {
-            homePage.verifyDevelopmentSpelling();
             homePage.saveScreenShotPNG();
             Assert.assertEquals(homePage.verifyDevelopmentSpelling(),true);
         });
 
+        Then("options for redirecting to social networks should appear only one time", () -> {
+            homePage.saveScreenShotPNG();
+        });
 
+        But("Facebook and Instagram social media access options appear in duplicate", () -> {
+            Assert.assertEquals(homePage.verifyDuplicateSocialNetwork(),true);
+        });
+
+        When("Enter your email address in the newsletter subscription field", () -> {
+            homePage.setNewsletterEmail();
+        });
+
+        When("Click on the Subscribe button", () -> {
+            homePage.clickOnSubscribre();
+        });
+
+        Then("A registration confirmation message should appear", () -> {
+            homePage.saveScreenShotPNG();
+        });
+
+        But("We are redirected to a page without content with an error message at the foot of the page", () -> {
+            Assert.assertEquals(homePage.verifyNewsletterSubscription(),true);
+        });
 
     }
 

@@ -2,12 +2,10 @@ package com.inova.pageObjects;
 
 import com.inova.config.Configuration;
 import com.inova.config.Properties;
-import com.inova.utils.ExcelManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,12 +17,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class Page {
-
-    @FindBy(className = "didomi-continue-without-agreeing")
-    private WebElement cookieOption;
-
-    @FindBy(xpath = "/html/body")
-    private WebElement page_content;
 
     /***
      *
@@ -42,8 +34,6 @@ public class Page {
 
     protected Configuration config = Properties.Config;
 
-    private ExcelManager excel;
-
     Page(){
         // Init
         driver = Properties.DriverManager.getDriver();
@@ -51,7 +41,6 @@ public class Page {
 
         js = (JavascriptExecutor) driver;
         action = new Actions(driver);
-        excel = new ExcelManager();
 
         //Waiter
         wait        = new WebDriverWait(driver, Duration.ofSeconds(4));
@@ -138,28 +127,8 @@ public class Page {
         element.click();
     }
 
-    public void handleCookie(){
-        if(shortUntil(visibilityOf(cookieOption))) clickOn(cookieOption);
-    }
-
-
-    public void refresh_page(){
-        driver.navigate().refresh();
-        waitForLoadingPage();
-    }
-
-    public void goToLinkpage(WebElement link){
-        scroll((link.getLocation().getY()-20));
-        driver.navigate().to(link.getAttribute("href"));
-        waitForLoadingPage();
-    }
-
     protected void scroll(int height){
         js.executeScript("window.scrollBy(0,"+height+")");
-    }
-
-    public String getScrollPosition( ){
-        return (js.executeScript("return window.pageYOffset;").toString());
     }
 
     @Attachment(value = "screenshot", type = "image/png")
