@@ -51,6 +51,7 @@ Scenario: Check that the options for accessing the social networks Facebook and 
   But Facebook and Instagram social media access options appear in duplicate
 
 @Bug_1669
+@OF-473
 @Severity=minor
 Scenario: Check for spelling errors
   When Scroll to the footer
